@@ -110,7 +110,6 @@ func (c *SDOClient) Handle(frame canopen.Frame) {
 			}
 		}
 	}
-
 }
 
 // Setup the client for communication with an SDO server
