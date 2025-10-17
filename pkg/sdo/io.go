@@ -21,6 +21,9 @@ type sdoRawReadWriter struct {
 // default to expedited / segmented transfer
 func (client *SDOClient) NewRawReader(nodeId uint8, index uint16, subindex uint8, blockEnabled bool, size uint32,
 ) (io.Reader, error) {
+	client.ioMutex.Lock()
+	defer client.ioMutex.Unlock()
+
 	// Setup client for a new transfer
 	err := client.setupServer(
 		uint32(ClientServiceId)+uint32(nodeId),
@@ -42,6 +45,9 @@ func (client *SDOClient) NewRawReader(nodeId uint8, index uint16, subindex uint8
 // default to expedited / segmented transfer
 func (client *SDOClient) NewRawWriter(nodeId uint8, index uint16, subindex uint8, blockEnabled bool, size uint32,
 ) (io.Writer, error) {
+	client.ioMutex.Lock()
+	defer client.ioMutex.Unlock()
+
 	// Setup client for a new transfer
 	err := client.setupServer(
 		uint32(ClientServiceId)+uint32(nodeId),

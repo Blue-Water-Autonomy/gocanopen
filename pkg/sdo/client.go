@@ -26,6 +26,7 @@ type SDOClient struct {
 	*canopen.BusManager
 	logger                     *slog.Logger
 	mu                         sync.Mutex
+	ioMutex                    sync.Mutex
 	od                         *od.ObjectDictionary
 	streamer                   *od.Streamer
 	rw                         *sdoRawReadWriter
